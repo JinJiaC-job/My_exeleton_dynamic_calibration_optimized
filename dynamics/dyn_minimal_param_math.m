@@ -116,9 +116,9 @@ end
 %% QR 分解
 % WW=Q*R, WW:(6*pnum_sum, pnum_sum), Q:(6*pnum_sum, 6*pnum_sum), R:(6*pnum_sum, pnum_sum)
 [Q, R] = qr(WW);
-pnum_min = 0;	% number of independent parameter
+pnum_min = 0;	% number of independent parameter, 最小参数集的数量n：r=rank(ww)
 for i = 1:pnum_sum
-   if (abs(R(i, i)) < 10^(-5))
+   if (abs(R(i, i)) < 10^(-5))%取R对角线上元素不为0的列组合成W1，对应参数组成P1
        min_param_ind(i) = 0;
    else
        min_param_ind(i) = 1;
@@ -128,7 +128,7 @@ end
 disp('<INFO> QR DECOMPOSITION complete!!');
 
 W_min = sym(zeros(6, pnum_min));	% 回归矩阵 (minimal set)
-R1 = zeros(pnum_min, pnum_min);
+R1 = zeros(pnum_min, pnum_min);     % 
 R2 = zeros(pnum_min, pnum_sum - pnum_min);
 cind = 1; cdep = 1;	% count the number of independent and dependent columns
 for i = 1:pnum_sum

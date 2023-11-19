@@ -45,6 +45,5 @@ elseif mode == "math"
 end
 
 T = W_mins * P_min; 
-
 end
 

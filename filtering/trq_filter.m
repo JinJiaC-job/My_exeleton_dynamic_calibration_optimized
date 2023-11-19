@@ -14,12 +14,19 @@ wn = wc / (ws / 2);
 % zero-phase digital filtering
 t_filt = filtfilt(b, a, t_raw);
 % t_filt = smooth(t_raw, 6, 'rloess');
-% t_filt = smooth(t_filt, 6, 'rloess');
-
+% t_smooth_filt = smooth(t_filt, 6, 'rloess');
+% 中值滤波和移动平均滤波
+for i = 1:6
+    t_med_filt = medfilt1(t_filt(:, i), 10);
+    t_smooth_filt = smooth(t_med_filt, 20, 'rloess');
+    t_filt(:, i) = t_smooth_filt;
+end
 %% VISUALIZATION
 for i = 1:6
 	figure(i + 18); 
 	plot(t_raw(:, i), 'g', 'LineWidth', 1.0); hold on;
+%     t_smooth_filt = smooth(t_filt(:, i), 6, 'rloess');
+
 	plot(t_filt(:, i), 'r', 'LineWidth', 0.5); hold off;
 	title(['第', num2str(i), '关节力矩滤波结果'], 'FontSize', 17, 'FontName', '宋体');
 	ylabel('关节力矩(Nm)', 'FontSize', 17, 'FontName', '宋体');

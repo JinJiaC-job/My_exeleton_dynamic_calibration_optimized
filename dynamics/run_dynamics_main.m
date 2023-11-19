@@ -40,5 +40,30 @@ save('..\identify\data\min_regressor.mat', 'W_min');
 
 
 
+%% 最小参数集向标准参数集转换
+clear, clc, close all;
+load('.\data\mat\dyn_minimal_param_syms.mat'); % (OR load('.\data\mat\dyn_minimal_param_math.mat'))
+load('.\data\mat\least_square.mat');
+
+dyn_Pmin2P;
+
+save('.\data\mat\mapping_Pmin2P.mat');
+save('.\data\mat\P_link.mat', 'P_link');
+save('.\data\mat\P_center.mat', 'P_center');
+save('.\utils\gen_params\P_center.mat', 'P_center');
+save('.\utils\gen_params\P_link.mat', 'P_link');
+% Save to txt
+addpath('.\utils\')
+mat2txt('.\data\txt\P_center.txt', P_center);
+mat2txt('.\data\txt\P_link.txt', P_link);
+rmpath('.\utils\')
+
+
+%% 验证标准参数集
+load('.\data\mat\mapping_Pmin2P.mat');
+load('.\data\mat\excit_filtering.mat');
+
+compute_model_error;
+
 
 

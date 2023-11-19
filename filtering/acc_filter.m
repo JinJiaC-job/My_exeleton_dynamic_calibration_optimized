@@ -30,6 +30,12 @@ elseif mode == "sensor"
 	qdd_pre_filt = input;  % input is qd_raw
 end
 qdd_filt = filtfilt(b, a, qdd_pre_filt);
+% 中值滤波和移动平均滤波
+for i = 1:6
+    qdd_med_filt = medfilt1(qdd_filt(:, i), 10);
+    qdd_smooth_filt = smooth(qdd_med_filt, 20, 'rloess');
+    qdd_filt(:, i) = qdd_smooth_filt;
+end
 % qdd_filt = smooth(qdd_pre_filt, 'rloess');
 
 %% VISUALIZATION

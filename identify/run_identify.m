@@ -1,10 +1,10 @@
 %% PART I: IMPLEMENT LEAST SQUARE ESTIMATION
-if 1
+% if 1
     clear, clc, close all;
     load('data\min_regressor.mat');
     load('data\excit_filtering.mat');
     % trajectory sampling period（需改）
-    traj_Ts = 0.01;
+    traj_Ts = 0.05;
     % number of minimal parameter set
     pnum_min = 48;
     
@@ -17,15 +17,15 @@ if 1
     % - `.\utils\min_regressor.m`
     
     least_square_estimation_math;  % (OR least_square_estimation_syms)
-    clear ans;
+%     clear ans;
     save('.\data\least_square.mat');
     save('..\dynamics\data\mat\least_square.mat');
-end
+% end
 
 %% PART II: VERIFY WITH MINIMAL PARAMETER SET
-if 1
-    clear;
-    load('data\least_square.mat');
+% if 1
+%     clear;
+%     load('data\least_square.mat');
     verify_identified_parameter;
-end
+% end
 

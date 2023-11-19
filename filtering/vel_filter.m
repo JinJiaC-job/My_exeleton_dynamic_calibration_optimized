@@ -31,7 +31,11 @@ elseif mode == "sensor"
 end
 % ¡„œ‡Œª ˝◊÷¬À≤®
 qd_filt = filtfilt(b, a, qd_pre_filt);	
-
+for i = 1:6
+    qd_med_filt = medfilt1(qd_filt(:, i), 10);
+    qd_smooth_filt = smooth(qd_med_filt, 20, 'rloess');
+    qd_filt(:, i) = qd_smooth_filt;
+end
 %% VISUALIZATION
 for i = 1:6
 	figure(i + 6); 

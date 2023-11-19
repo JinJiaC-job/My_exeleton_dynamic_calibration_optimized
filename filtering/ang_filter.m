@@ -9,8 +9,10 @@ function q_filt = ang_filter(n, ws, wc, q_raw, path_prefix)
 
 % 归一化截止频率
 wn = wc / (ws / 2);
-% low-pass filter:n是滤波器的阶数，根据需要选择合适的整数，Wn是归一化截止频率，又叫自然频率，Wn = 截止频率*2/采样频率，如果要留下小于截至频率的信号，
-[b, a] = butter(n, wn, 'low');
+% 低通滤波器:n是滤波器的阶数，根据需要选择合适的整数，Wn是归一化截止频率，又叫自然频率
+% Wn = 截止频率*2/采样频率，如果要留下小于截至频率的信号。
+filtertype = 'low';
+[b, a] = butter(n, wn, filtertype);
 % zero-phase digital filtering
 q_filt = filtfilt(b, a, q_raw); 
 

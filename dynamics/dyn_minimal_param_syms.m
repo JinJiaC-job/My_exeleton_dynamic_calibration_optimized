@@ -17,8 +17,8 @@ addpath('.\utils');
 % d = [thetaANDd(1), -188.76, -81.24, 0, 113.03, 111.50]';
 % a = [0, 0, 0, 0, 267.5, 0]';
 % alp = [0, -pi/2, pi/2, 4/9*pi, 0, pi/2]';
-d2 = 188.76; d3 = -81.24; d5 = 113.03; d6 = 111.50;
-a5 = 267.5; alp4 = 4/9*pi; g = 9802;% mm
+d2 = -188.76; d3 = -81.24; d5 = -12.15; d6 = 112;
+a5 = 252.5; alp4 = 4/9*pi; g = 9802;%单位：mm
 % number of dynamic parameters = 13
 % m, mc1, mc2, mc3, Ioxx, Ioyy, Iozz, Ioxy, Ioxz, Ioyz, Ia, fv, fc
 pnum_sum = evalin('base', 'pnum_sum');
