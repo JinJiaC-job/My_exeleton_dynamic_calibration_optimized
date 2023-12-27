@@ -7,7 +7,7 @@ function w_min = min_regressor(q, qd, qdd)
 % d3 = evalin('base', 'dd3');
 % d5 = evalin('base', 'dd5');
 % d7 = evalin('base', 'dd7');
-d2 = -188.76; d3 = -81.24; d5 = -12.15; d6 = 112;
+d2 = -188.76; d3 = -81.24; d5 = 12.15; d6 = 112;
 a5 = 252.5; alp4 = 4/9*pi; g = 9802;
 
 q1 = q(1); q2 = q(2); q3 = q(3); q4 = q(4); q5 = q(5); q6 = q(6); 

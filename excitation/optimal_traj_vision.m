@@ -132,7 +132,7 @@ L1 = Link('a', 0, 'alpha', 0, 'theta', 0, 'prismatic', 'modified');L1.qlim = [0,
 L2 = Link('d', -188.76, 'a', 0, 'alpha', -pi/2, 'modified');L2.qlim = [-30, 90]* pi / 180;
 L3 = Link('d', -81.24,  'a', 0, 'alpha', pi/2, 'modified');L3.qlim = [-120, 30]* pi / 180;
 L4 = Link('d', 0,       'a', 0,   'alpha', 4/9*pi, 'modified');L4.qlim = [-210, -30]* pi / 180;
-L5 = Link('d', -12.15,  'a', 252.5, 'alpha', 0, 'modified');L5.qlim = [60, 210]* pi / 180;
+L5 = Link('d', 12.15,  'a', 252.5, 'alpha', 0, 'modified');L5.qlim = [60, 210]* pi / 180;
 L6 = Link('d', 112,  'a', 0,   'alpha', pi/2, 'modified');L6.qlim = [-90, 90]* pi / 180;
 % L7 = Link('d', 388.96,  'a', 0,   'alpha', 0);
 % L1.qlim([-170, 170] * pi / 180);

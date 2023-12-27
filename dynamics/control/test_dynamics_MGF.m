@@ -9,7 +9,7 @@ q1 = q(1); q2 = q(2); q3 = q(3); q4 = q(4); q5 = q(5); q6 = q(6);
 qd1 = qd(1); qd2 = qd(2); qd3 = qd(3); qd4 = qd(4); qd5 = qd(5); qd6 = qd(6);
 qdd1 = qdd(1); qdd2 = qdd(2); qdd3 = qdd(3); qdd4 = qdd(4); qdd5 = qdd(5); qdd6 = qdd(6);
 %% 导入运动学参数
-d2 = -188.76; d3 = -81.24; d5 = -12.15; d6 = 112;
+d2 = -188.76; d3 = -81.24; d5 = 12.15; d6 = 112;
 a5 = 252.5; alp4 = 4/9*pi; g = 9802;%单位：mm
 fe1 = 0; fe2 = 0; fe3 = 0; ne1 = 0; ne2 = 0; ne3 = 0;
 
@@ -201,13 +201,22 @@ disp('<INFO> Friction Torque SUBSTITUTED!!');
 
 %% 计算各关节最终扭矩
 
-% Control_tau = MM * qdd + GG + FF;
-Control_tau = GG + FF;
-tt1 = char(vpa(Control_tau(1),4)); tt2 = char(vpa(Control_tau(2),4)); tt3 = char(vpa(Control_tau(3),4)); 
-tt4 = char(vpa(Control_tau(4),4)); tt5 = char(vpa(Control_tau(5),4)); tt6 = char(vpa(Control_tau(6),4)); 
-fid = fopen('.\data\txt\Control_tau.txt', 'w');
+Control_tau = MM * qdd + GG + FF;
+% Control_tau = GG + FF;
+tt1 = char(vpa(Control_tau(1),6)); tt2 = char(vpa(Control_tau(2),6)); tt3 = char(vpa(Control_tau(3),6)); 
+tt4 = char(vpa(Control_tau(4),6)); tt5 = char(vpa(Control_tau(5),6)); tt6 = char(vpa(Control_tau(6),6)); 
+fid = fopen('.\data\txt\Control_tau_MGF.txt', 'w');
 fprintf(fid, ...
     'T1=%s\rT2=%s\rT3=%s\rT4=%s\rT5=%s\rT6=%s\r', ...
+    tt1, tt2, tt3, tt4, tt5, tt6);
+fclose(fid);
+
+% 完整的动力学
+ttt1 = char(vpa(TT(1),6)); ttt2 = char(vpa(TT(2),6)); ttt3 = char(vpa(TT(3),6));
+ttt4 = char(vpa(TT(4),6)); ttt5 = char(vpa(TT(5),6)); ttt6 = char(vpa(TT(6),6));
+fid = fopen('.\data\txt\Control_tau_all.txt', 'w');
+fprintf(fid, ...
+    'TAU[1]=%s\rTAU[2]=%s\rTAU[3]=%s\rTAU[4]=%s\rTAU[5]=%s\rTAU[6]=%s\r', ...
     tt1, tt2, tt3, tt4, tt5, tt6);
 fclose(fid);
 
@@ -216,8 +225,9 @@ fclose(fid);
 
 %% 计算各关节扭矩数值
 Control_tau_math = sym(zeros(6, 1));
-
-q = [95.35, 0, 0, -pi/2, pi/2, 0];
+TT_math = sym(zeros(6, 1));
+% q = [95.35, 0, 0, -pi/2, 90/180*pi-8.2/180*pi, 0];
+q = [95.35, 0, 0, -pi/2, (90-8.2)/180*pi-pi/2, 0];
 qd = [0, 0, 0, 0, 0, 0];
 qdd = [0, 0, 0, 0, 0, 0];
 q1 = q(1); q2 = q(2); q3 = q(3); q4 = q(4); q5 = q(5); q6 = q(6);
@@ -233,13 +243,28 @@ for k = 1:6
  				   qd1, qd2, qd3, qd4, qd5, qd6, ...
  				   qdd1, qdd2, qdd3, qdd4, qdd5, qdd6}));
 end
+
+for k = 1:6
+    TT_math(k) = eval(subs(TT(k), ...
+                 {'q1', 'q2', 'q3', 'q4', 'q5', 'q6', ...
+ 				  'qd1', 'qd2', 'qd3', 'qd4', 'qd5', 'qd6', ...
+				  'qdd1', 'qdd2', 'qdd3', 'qdd4', 'qdd5', 'qdd6'}, ...
+				  {q1, q2, q3, q4, q5, q6, ...
+ 				   qd1, qd2, qd3, qd4, qd5, qd6, ...
+ 				   qdd1, qdd2, qdd3, qdd4, qdd5, qdd6}));
+end
 % disp('<INFO> Friction Torque SUBSTITUTED!!');
-vpa(Control_tau_math(1),4)
-vpa(Control_tau_math(2),4)
-vpa(Control_tau_math(3),4)
-vpa(Control_tau_math(4),4)
+% vpa(Control_tau_math(1),4)
+% vpa(Control_tau_math(2),4)
+% vpa(Control_tau_math(3),4)
+% vpa(Control_tau_math(4),4)
 vpa(Control_tau_math(5),4)
-vpa(Control_tau_math(6),4)
+% vpa(Control_tau_math(6),4)
 
-
+% vpa(TT_math(1),4)
+% vpa(TT_math(2),4)
+% vpa(TT_math(3),4)
+% vpa(TT_math(4),4)
+vpa(TT_math(5),4)
+% vpa(TT_math(6),4)
 

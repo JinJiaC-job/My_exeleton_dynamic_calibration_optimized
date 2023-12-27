@@ -8,7 +8,7 @@ function T = NewtonEuler_verify_math(q, qd, qdd, mode)
 % s4 = sin(q(4)); c4 = cos(q(4));
 % s5 = sin(q(5)); c5 = cos(q(5));
 % s6 = sin(q(6)); c6 = cos(q(6));
-d2 = 188.76; d3 = -81.24; d5 = -12.15; d6 = 112;
+d2 = -188.76; d3 = -81.24; d5 = 12.15; d6 = 112;
 a5 = 252.5; alp4 = 4/9*pi; g = 9802;% mm
 
 th = sym([0,q(2),q(3),q(4),q(5),q(6)]);

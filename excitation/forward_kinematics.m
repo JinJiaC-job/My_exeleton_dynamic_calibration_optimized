@@ -7,7 +7,7 @@ function [T, tip, rot] = forward_kinematics(q)
 
 % DH parameters (in mm/ rad), 加上工具坐标系
 a = [0 0 0 0 252.5 0];
-d = [q(1) -188.76 -81.24 0 -12.15 111.50];
+d = [q(1) -188.76 -81.24 0 12.15 112];
 alpha = [0 -pi/2 pi/2 4/9*pi 0 pi/2];
 theta = [0 q(2) q(3) q(4) q(5) q(6)];
 T67 = [1 0 0 0; 
